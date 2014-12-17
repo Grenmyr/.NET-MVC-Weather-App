@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weather.MVC", "Weather.MVC\Weather.MVC.csproj", "{5DCA69AF-3A5B-44A6-8D87-4A2E260E1E97}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -9,13 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weather.MVC", "Weather.MVC\
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weather.MVC.Tests", "Weather.MVC.Tests\Weather.MVC.Tests.csproj", "{918591BD-0080-4CBE-AF9F-BE25A892764F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weather.API", "Weather.API\Weather.API.csproj", "{27C43359-C95A-4E1A-AE21-21291BA599A3}"
-	ProjectSection(ProjectDependencies) = postProject
-		{B4628CD1-FBC9-4F40-BE73-7D8D66AA4BE2} = {B4628CD1-FBC9-4F40-BE73-7D8D66AA4BE2}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weather.API.Tests", "Weather.API.Tests\Weather.API.Tests.csproj", "{53314085-FA83-4385-8ABC-9795953D795B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weather.Domain", "Weather.Domain\Weather.Domain.csproj", "{B4628CD1-FBC9-4F40-BE73-7D8D66AA4BE2}"
 EndProject
@@ -33,14 +26,6 @@ Global
 		{918591BD-0080-4CBE-AF9F-BE25A892764F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{918591BD-0080-4CBE-AF9F-BE25A892764F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{918591BD-0080-4CBE-AF9F-BE25A892764F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{27C43359-C95A-4E1A-AE21-21291BA599A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{27C43359-C95A-4E1A-AE21-21291BA599A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{27C43359-C95A-4E1A-AE21-21291BA599A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{27C43359-C95A-4E1A-AE21-21291BA599A3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{53314085-FA83-4385-8ABC-9795953D795B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{53314085-FA83-4385-8ABC-9795953D795B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{53314085-FA83-4385-8ABC-9795953D795B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{53314085-FA83-4385-8ABC-9795953D795B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B4628CD1-FBC9-4F40-BE73-7D8D66AA4BE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B4628CD1-FBC9-4F40-BE73-7D8D66AA4BE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4628CD1-FBC9-4F40-BE73-7D8D66AA4BE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
