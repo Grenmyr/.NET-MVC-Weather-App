@@ -9,17 +9,31 @@ using Newtonsoft.Json.Linq;
 using System.Configuration;
 using System.IO;
 using System.Net;
+using System.Xml.Linq;
 
 namespace Weather.Domain.Webservices
 {
     public class YrWebservice
     {
 
-        public Location FindLocation(string lon, string lat)
+        public Forecast GetForecast(Location location)
         {
-            var urlString = String.Format("http://api.yr.no/weatherapi/locationforecast/1.9/?lat={0};lon={1}", lon, lat);
-            return JArray.Parse(urlString).Select(l => new Location(l)).SingleOrDefault();
+            XDocument xmlResponse;
+            String searchObject;
+            var urlString = String.Format("http://api.yr.no/weatherapi/locationforecast/1.9/?lat={0};lon={1}", location.Lng, location.Lat);
+
+            var webRequest = WebRequest.Create(urlString);
+
+            using (var response = webRequest.GetResponse())
+            using (var content = response.GetResponseStream())
+            using (var reader = new StreamReader(content))
+            {
+                xmlResponse = XDocument.Load(content);
+                searchObject = xmlResponse.Root.ToString();
+
+            }
+            //TODO XML Istället för Json
+            return new Forecast();
         }
-    
     }
 }
