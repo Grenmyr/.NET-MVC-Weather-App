@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Weather.Domain;
+using Weather.Domain.Entities;
+using Weather.Domain.Webservices;
+namespace Weather.MVC.Controllers
+{
+    public class WeatherController : Controller
+    {
+        // GET: Weather
+        public ActionResult Index()
+        {
+            var location = new Location();
+            location.Lat = "56";
+            location.Lng = "16";
+
+            var forecast = new YrWebservice();
+            forecast.GetForecast(location);
+            return View();
+        }
+    }
+}

@@ -10,7 +10,7 @@ using Weather.Domain.Entities;
 
 namespace Weather.Domain.Webservices
 {
-    class GeoNamesWebservice
+    public class GeoNamesWebservice
     {
         public Location FindLocation(string name)
         {

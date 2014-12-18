@@ -29,9 +29,27 @@ namespace Weather.Domain.Webservices
             using (var reader = new StreamReader(content))
             {
                 xmlResponse = XDocument.Load(content);
-                searchObject = xmlResponse.Root.ToString();
+                //searchObject = xmlResponse.Root;
 
             }
+
+            //var listOne = xmlResponse.Descendants("time").Select(d => d).Where(d => d.LastAttribute.ToString().Contains("15:00")).ToList();
+            var listTwo = xmlResponse.Descendants("time")
+                .Select(d => d)
+                .Where(d => d.Attribute("to").Value
+                .Contains("15:00")).ToList();
+
+            var listThree = xmlResponse.Descendants("time").Select(d => d).ToList();
+            //var list = xmlResponse.Descendants("time").First();
+
+            //var items = (from forecast in xmlResponse.Descendants("time")
+            //             select new Forecast
+            //             {
+            //                 Temperature = int.Parse(forecast.Element("temperature").Value),
+            //                 SymbolId = forecast.Value
+            //             });
+            
+
             //TODO XML Istället för Json
             return new Forecast();
         }
