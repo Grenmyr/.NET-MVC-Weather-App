@@ -17,6 +17,7 @@ namespace Weather.Domain.Webservices
             String searchObject;
             //var urlString = String.Format("http://api.geonames.org/search?q={0}&maxRows=10&featureCode=PPL&featureCode=ADM2&type=json&country=SE&username=dg222cs", name);
             var urlString = String.Format("http://http://api.geonames.org/search?q={0}&maxRows=10&featureClass=P&type=xml&country=SE&username=dg222cs", name);
+            var das = "api.geonames.org/search?q=Kalmar&maxRows=1000&featureClass=P&type=xml&country=SE&username=dg222cs";
             var webRequest = WebRequest.Create(urlString);
 
             using(var response = webRequest.GetResponse())
