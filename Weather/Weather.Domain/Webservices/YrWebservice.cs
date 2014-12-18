@@ -19,7 +19,6 @@ namespace Weather.Domain.Webservices
         public Forecast GetForecast(Location location)
         {
             XDocument xmlResponse;
-            String searchObject;
             var urlString = String.Format("http://api.yr.no/weatherapi/locationforecast/1.9/?lat={0};lon={1}", location.Lat, location.Lng);
 
             var webRequest = WebRequest.Create(urlString);

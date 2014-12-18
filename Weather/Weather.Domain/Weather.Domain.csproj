@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\IGenericRepository.cs" />
+    <Compile Include="DAL\IUnitOfWork.cs" />
     <Compile Include="DAL\Migrations\201412171018320_initial create.cs" />
     <Compile Include="DAL\Migrations\201412171018320_initial create.Designer.cs">
       <DependentUpon>201412171018320_initial create.cs</DependentUpon>
@@ -75,10 +76,12 @@
       <DependentUpon>201412171127572_addedFK.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\Migrations\Configuration.cs" />
+    <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Entities\Forecast.cs" />
     <Compile Include="Entities\Location.cs" />
     <Compile Include="DAL\WeatherContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\WeatherService.cs" />
     <Compile Include="Webservices\GeoNamesWebservice.cs" />
     <Compile Include="Webservices\YrWebservice.cs" />
   </ItemGroup>

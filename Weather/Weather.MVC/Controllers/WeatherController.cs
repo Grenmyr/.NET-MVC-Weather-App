@@ -13,12 +13,16 @@ namespace Weather.MVC.Controllers
         // GET: Weather
         public ActionResult Index()
         {
-            var location = new Location();
-            location.Lat = "56";
-            location.Lng = "16";
+            //var location = new Location();
+            //location.Lat = "56";
+            //location.Lng = "16";
 
-            var forecast = new YrWebservice();
-            forecast.GetForecast(location);
+            //var forecast = new YrWebservice();
+            //forecast.GetForecast(location);
+
+            var search = new GeoNamesWebservice();
+            var list = search.FindLocation("Kalmar");
+
             return View();
         }
     }

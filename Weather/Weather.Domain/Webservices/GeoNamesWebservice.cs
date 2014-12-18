@@ -12,12 +12,11 @@ namespace Weather.Domain.Webservices
 {
     public class GeoNamesWebservice
     {
-        public Location FindLocation(string name)
+        public IReadOnlyList<Location> FindLocation(string name)
         {
             String searchObject;
-            var urlString = String.Format("http://api.geonames.org/search?q={0}&maxRows=10&featureCode=PPL&featureCode=ADM2&type=json&country=SE&username=sb222rf", name);
-          
-
+            //var urlString = String.Format("http://api.geonames.org/search?q={0}&maxRows=10&featureCode=PPL&featureCode=ADM2&type=json&country=SE&username=dg222cs", name);
+            var urlString = String.Format("http://http://api.geonames.org/search?q={0}&maxRows=10&featureClass=P&type=xml&country=SE&username=dg222cs", name);
             var webRequest = WebRequest.Create(urlString);
 
             using(var response = webRequest.GetResponse())
@@ -26,8 +25,7 @@ namespace Weather.Domain.Webservices
             {
                  searchObject = reader.ReadToEnd();
             }
-
-            return JObject.Parse(searchObject)["geonames"].Select(l => new Location(l)).SingleOrDefault();
+            return JObject.Parse(searchObject)["geonames"].Select(l => new Location(l)).ToList().AsReadOnly();
         }
     }
 }

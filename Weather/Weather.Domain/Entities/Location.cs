@@ -7,6 +7,17 @@ namespace Weather.Domain.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
+    public partial class Location
+    {
+        public Location(JToken location)
+            : this()
+        {
+            Name = location.Value<string>("toponymName");
+            Lat = location.Value<string>("lat");
+            Lng = location.Value<string>("lng");
+        }
+    }
+
     [Table("appSchema.Location")]
     public partial class Location
     {
@@ -15,14 +26,7 @@ namespace Weather.Domain.Entities
         {
             this.Forecasts = new HashSet<Forecast>();
         }
-        public Location(JToken location)
-            : this()
-        {
-            Name = location.Value<string>("toponymName");
-            Lat = location.Value<string>("lat");
-            Lng = location.Value<string>("lng");
-
-        }
+       
 
         public int Id { get; set; }
 
