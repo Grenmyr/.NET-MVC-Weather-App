@@ -9,19 +9,21 @@ namespace Weather.Domain.Entities
     [Table("appSchema.Forecast")]
     public partial class Forecast
     {
-        public int Symbolnum;
+       
 
         public int Id { get; set; }
 
-        public int Temperature { get; set; }
+        [StringLength(4)]
+        public string Temperature { get; set; }
 
-        public int CloudFactor { get; set; }
+        [StringLength(6)]
+        public string Cloudiness { get; set; }
 
-        public int NederBird { get; set; }
+        [StringLength(6)]
+        public string NederBird { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string SymbolId { get; set; }
+        public int SymbolId { get; set; }
 
         public int LocationId { get; set; }
         public virtual Location Location { get; set; }

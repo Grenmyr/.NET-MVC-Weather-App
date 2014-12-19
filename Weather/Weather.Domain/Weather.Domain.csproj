@@ -75,6 +75,10 @@
     <Compile Include="DAL\Migrations\201412171127572_addedFK.Designer.cs">
       <DependentUpon>201412171127572_addedFK.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Migrations\201412190926159_InsertedProperties.cs" />
+    <Compile Include="DAL\Migrations\201412190926159_InsertedProperties.Designer.cs">
+      <DependentUpon>201412190926159_InsertedProperties.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Migrations\Configuration.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Entities\Forecast.cs" />
@@ -104,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DAL\Migrations\201412171127572_addedFK.resx">
       <DependentUpon>201412171127572_addedFK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\Migrations\201412190926159_InsertedProperties.resx">
+      <DependentUpon>201412190926159_InsertedProperties.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

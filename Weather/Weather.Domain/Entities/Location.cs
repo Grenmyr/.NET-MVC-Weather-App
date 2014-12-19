@@ -15,6 +15,7 @@ namespace Weather.Domain.Entities
             Name = location.Value<string>("toponymName");
             Lat = location.Value<string>("lat");
             Lng = location.Value<string>("lng");
+
         }
     }
 
@@ -41,6 +42,11 @@ namespace Weather.Domain.Entities
         [Required]
         [StringLength(100)]
         public string Name { get; set; }
+
+        public DateTime Timestamp { get; set; }
+
+        [Required]
+        public int geonameId { get; set; }
 
         public virtual ICollection<Forecast> Forecasts { get; set; }
     }
