@@ -2,7 +2,7 @@
 using Weather.Domain.Entities;
 namespace Weather.Domain.DAL
 {
-    interface IUnitOfWork
+    public interface IUnitOfWork
     {
         IGenericRepository<Forecast> ForecastRepository { get; }
         IGenericRepository<Location> LocationRepository { get; }

@@ -9,7 +9,7 @@ using Weather.Domain.Webservices;
 
 namespace Weather.Domain.Service
 {
-    class WeatherService
+    public class WeatherService
     {
         private IUnitOfWork _unitOfWork;
         private GeoNamesWebservice _geoNamesWebservice;
@@ -27,11 +27,26 @@ namespace Weather.Domain.Service
             _geoNamesWebservice = geoNamesWebservice;
         }
 
-        public Location getLocation(string search)
+        public IEnumerable< Location> getLocation(string search)
         {
-            var location = _unitOfWork.LocationRepository.Get(l => l.Name == search);
+            var locations = _unitOfWork.LocationRepository.Get(l => l.Name == search);
 
-            return new Location();
+            //TODO IMPLEMENT TIMESTAMP
+            if (locations.Any()) 
+            {
+                return locations;
+            }
+
+            locations = _geoNamesWebservice.FindLocation(search);
+
+            var relevantList = locations.Select(l => l).Where(l => l.Name == search).ToList();
+
+            foreach (var location in relevantList)
+            {
+                _unitOfWork.LocationRepository.Add(location);
+            }
+         
+            return locations;
         }
 
     }

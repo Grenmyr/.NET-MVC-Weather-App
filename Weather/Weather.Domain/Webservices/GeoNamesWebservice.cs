@@ -12,7 +12,7 @@ namespace Weather.Domain.Webservices
 {
     public class GeoNamesWebservice
     {
-        public IReadOnlyList<Location> FindLocation(string name)
+        public IEnumerable<Location> FindLocation(string name)
         {
             String searchObject;
             //var urlString = String.Format("http://api.geonames.org/search?q={0}&maxRows=10&featureCode=PPL&featureCode=ADM2&type=json&country=SE&username=dg222cs", name);
@@ -26,6 +26,7 @@ namespace Weather.Domain.Webservices
             {
                  searchObject = reader.ReadToEnd();
             }
+
             return JObject.Parse(searchObject)["geonames"].Select(l => new Location(l)).ToList().AsReadOnly();
         }
     }

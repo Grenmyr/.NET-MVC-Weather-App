@@ -29,10 +29,11 @@ namespace Weather.Domain.Webservices
             {
                 xmlResponse = XDocument.Load(content);
                 //searchObject = xmlResponse.Root;
-
             }
             var alltimes = xmlResponse.Descendants("time");
             var current = alltimes.Take(2).ToList();
+
+
             var forcasts = alltimes.Skip(2).Where(d => d.Attribute("to").Value.Contains("12:00")
                                             && d.Attribute("from").Value.Contains("12:00"))
                                   .SelectMany(n => new[] {n, n.NextNode}).Take(8).ToList();

@@ -9,8 +9,6 @@ namespace Weather.Domain.Entities
     [Table("appSchema.Forecast")]
     public partial class Forecast
     {
-       
-
         public int Id { get; set; }
 
         [StringLength(4)]

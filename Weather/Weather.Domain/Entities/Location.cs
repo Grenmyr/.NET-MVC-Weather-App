@@ -12,10 +12,10 @@ namespace Weather.Domain.Entities
         public Location(JToken location)
             : this()
         {
-            Name = location.Value<string>("toponymName");
+            Name = location.Value<string>("name");
             Lat = location.Value<string>("lat");
             Lng = location.Value<string>("lng");
-
+            Timestamp = DateTime.Now.AddHours(1);
         }
     }
 
@@ -43,6 +43,7 @@ namespace Weather.Domain.Entities
         [StringLength(100)]
         public string Name { get; set; }
 
+        [Required]
         public DateTime Timestamp { get; set; }
 
         [Required]
