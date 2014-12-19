@@ -44,9 +44,10 @@ namespace Weather.Domain.Service
             foreach (var location in relevantList)
             {
                 _unitOfWork.LocationRepository.Add(location);
+                _unitOfWork.Save();
             }
-         
-            return locations;
+
+            return relevantList;
         }
 
     }

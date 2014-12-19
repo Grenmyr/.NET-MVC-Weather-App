@@ -79,6 +79,10 @@
     <Compile Include="DAL\Migrations\201412190926159_InsertedProperties.Designer.cs">
       <DependentUpon>201412190926159_InsertedProperties.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Migrations\201412191240167_RequiredTimestamp.cs" />
+    <Compile Include="DAL\Migrations\201412191240167_RequiredTimestamp.Designer.cs">
+      <DependentUpon>201412191240167_RequiredTimestamp.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Migrations\Configuration.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Entities\Forecast.cs" />
@@ -111,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DAL\Migrations\201412190926159_InsertedProperties.resx">
       <DependentUpon>201412190926159_InsertedProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\Migrations\201412191240167_RequiredTimestamp.resx">
+      <DependentUpon>201412191240167_RequiredTimestamp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

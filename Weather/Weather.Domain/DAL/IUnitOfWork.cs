@@ -6,5 +6,7 @@ namespace Weather.Domain.DAL
     {
         IGenericRepository<Forecast> ForecastRepository { get; }
         IGenericRepository<Location> LocationRepository { get; }
+
+         void Save();
     }
 }
