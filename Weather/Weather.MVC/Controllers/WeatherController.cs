@@ -22,9 +22,15 @@ namespace Weather.MVC.Controllers
         {
             _service = weatherservice;
         }
-
         // GET: Weather
         public ActionResult Index()
+        {
+            return View("index");
+        }
+     
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index([Bind(Include="Name")]Location location)
         {
             //var date = DateTime.Now.AddHours(1);
             //var newdate = DateTime.Now;   
@@ -38,9 +44,9 @@ namespace Weather.MVC.Controllers
 
             //var search = new GeoNamesWebservice();
             //var list = search.FindLocation("Kalmar");
-            var location = _service.getLocation("Västervik");
+            var locations = _service.getLocation("Västervik");
 
-            return View("Locations",location);
+            return View("Locations",locations);
         }
        
     }

@@ -47,7 +47,8 @@ namespace Weather.Domain.Entities
         public DateTime Timestamp { get; set; }
 
         [Required]
-        public int geonameId { get; set; }
+        [StringLength(100)]
+        public string adminName1 { get; set; }
 
         public virtual ICollection<Forecast> Forecasts { get; set; }
     }

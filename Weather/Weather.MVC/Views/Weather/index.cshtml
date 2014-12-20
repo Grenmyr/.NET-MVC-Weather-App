@@ -1,7 +1,25 @@
-﻿
+﻿@model Weather.Domain.Entities.Location
 @{
+
     ViewBag.Title = "index";
 }
 
 <h2>index</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        @Html.LabelFor(model => model.Name):
+    </div>
+
+    <div>
+        @Html.EditorFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+
+    <p>
+        <input type="submit" value="Välj Plats" />
+    </p>
+}
 

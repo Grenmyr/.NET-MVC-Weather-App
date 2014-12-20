@@ -46,7 +46,6 @@ namespace Weather.Domain.Service
                 _unitOfWork.LocationRepository.Add(location);
                 _unitOfWork.Save();
             }
-
             return relevantList;
         }
 
