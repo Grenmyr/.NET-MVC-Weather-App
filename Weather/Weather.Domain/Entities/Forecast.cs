@@ -24,6 +24,7 @@ namespace Weather.Domain.Entities
         public int SymbolId { get; set; }
 
         public int LocationId { get; set; }
+
         public virtual Location Location { get; set; }
     }
 }

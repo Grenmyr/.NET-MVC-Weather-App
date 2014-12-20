@@ -12,9 +12,11 @@ namespace Weather.Domain.Entities
         public Location(JToken location)
             : this()
         {
-            Name = location.Value<string>("name");
+            AdminName1 = location.Value<string>("adminName1");
+            CountryName = location.Value<string>("countryName");     
             Lat = location.Value<string>("lat");
             Lng = location.Value<string>("lng");
+            Name = location.Value<string>("name");         
             Timestamp = DateTime.Now.AddHours(1);
         }
     }
@@ -40,15 +42,20 @@ namespace Weather.Domain.Entities
         public string Lng { get; set; }
 
         [Required]
-        [StringLength(100)]
-        public string Name { get; set; }
-
-        [Required]
         public DateTime Timestamp { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string adminName1 { get; set; }
+        public string Name { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string AdminName1 { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string CountryName { get; set; }
+
 
         public virtual ICollection<Forecast> Forecasts { get; set; }
     }

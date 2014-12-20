@@ -44,7 +44,7 @@ namespace Weather.MVC.Controllers
 
             //var search = new GeoNamesWebservice();
             //var list = search.FindLocation("Kalmar");
-            var locations = _service.getLocation("Västervik");
+            var locations = _service.getLocation(location.Name);
 
             return View("Locations",locations);
         }

@@ -83,6 +83,10 @@
     <Compile Include="DAL\Migrations\201412191240167_RequiredTimestamp.Designer.cs">
       <DependentUpon>201412191240167_RequiredTimestamp.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Migrations\201412201100580_Added AdminName1 and CountryName.cs" />
+    <Compile Include="DAL\Migrations\201412201100580_Added AdminName1 and CountryName.Designer.cs">
+      <DependentUpon>201412201100580_Added AdminName1 and CountryName.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Migrations\Configuration.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Entities\Forecast.cs" />
@@ -118,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DAL\Migrations\201412191240167_RequiredTimestamp.resx">
       <DependentUpon>201412191240167_RequiredTimestamp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\Migrations\201412201100580_Added AdminName1 and CountryName.resx">
+      <DependentUpon>201412201100580_Added AdminName1 and CountryName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
