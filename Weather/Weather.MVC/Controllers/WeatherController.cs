@@ -25,8 +25,8 @@ namespace Weather.MVC.Controllers
         // GET: Weather
         public ActionResult Index()
         {
-            var yr = new YrWebservice();
-            var dsa = yr.GetForecasts(new Location());
+            //var yr = new YrWebservice();
+            //var dsa = yr.GetForecasts(new Location());
 
             return View("index");
         }

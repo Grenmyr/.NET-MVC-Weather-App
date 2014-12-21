@@ -28,12 +28,12 @@ namespace Weather.Domain.Service
             _yrWebservice = yrWebservice;
         }
 
-        public IEnumerable< Location> GetLocation(string search)
+        public IEnumerable<Location> GetLocation(string search)
         {
             var locations = _unitOfWork.LocationRepository.Get(l => l.Name == search);
 
             //TODO IMPLEMENT TIMESTAMP
-            if (locations.Any()) 
+            if (locations.Any())
             {
                 return locations;
             }
@@ -50,24 +50,24 @@ namespace Weather.Domain.Service
             return relevantList;
         }
 
-        public Location GetLocationById (int id)
+        public Location GetLocationById(int id)
         {
-             var selectedLocation = _unitOfWork.LocationRepository.GetById(id);
+            var selectedLocation = _unitOfWork.LocationRepository.GetById(id);
 
-             return selectedLocation;
+            return selectedLocation;
         }
 
         public IEnumerable<Forecast> GetForecast(Location location)
         {
-            if (!location.Forecasts.Any() || (location.Timestamp - DateTime.Now).TotalHours <= 0) 
+            if (!location.Forecasts.Any() || (location.Timestamp - DateTime.Now).TotalHours <= 0)
             {
-                RefreshForecasts(location);                        
+                RefreshForecasts(location);
             }
             else
             {
-                var forecast = location.Forecasts;  
+                var forecast = location.Forecasts;
             }
-        
+
             //var forecasts = _yrWebservice.GetForecast(id);
             throw new NotImplementedException();
         }
@@ -75,14 +75,20 @@ namespace Weather.Domain.Service
         public void RefreshForecasts(Location location)
         {
 
-            foreach (var forecast in location.Forecasts)
+            foreach (var forecast in location.Forecasts.ToList())
             {
                 _unitOfWork.ForecastRepository.Remove(forecast.Id);
+                
             }
+            _unitOfWork.Save();
+            var forecasts = _yrWebservice.GetForecasts(location);
 
-             var test = _yrWebservice.GetForecasts(location);
-
-
+            foreach (var forecast in forecasts)
+            {
+                _unitOfWork.ForecastRepository.Add(forecast);
+                
+            }
+            _unitOfWork.Save();
 
 
         }

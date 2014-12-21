@@ -6,7 +6,6 @@ namespace Weather.Domain.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
     using System.Collections;
-    using System;
     using System.Xml.Linq;
 
 
