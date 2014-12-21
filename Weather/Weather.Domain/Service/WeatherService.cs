@@ -1,24 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Weather.Domain.DAL;
 using Weather.Domain.Entities;
+using Weather.Domain.Validation;
 using Weather.Domain.Webservices;
 
 namespace Weather.Domain.Service
 {
-    public class WeatherService
+    public class WeatherService 
     {
         private IUnitOfWork _unitOfWork;
         private GeoNamesWebservice _geoNamesWebservice;
         private YrWebservice _yrWebservice;
+        private DbContextDataAnotationValidation _dbContextDataAnotationValidation;
 
         
 
         public WeatherService()
-            : this(new UnitOfWork(), new GeoNamesWebservice(), new YrWebservice())
+            : this(new UnitOfWork(), new GeoNamesWebservice(), new YrWebservice(), new DbContextDataAnotationValidation())
         {
 
         }
@@ -26,11 +29,16 @@ namespace Weather.Domain.Service
    
       
 
-        public WeatherService(IUnitOfWork unitOfWork, GeoNamesWebservice geoNamesWebservice, YrWebservice yrWebservice)
+        public WeatherService(IUnitOfWork unitOfWork,
+            GeoNamesWebservice geoNamesWebservice,
+            YrWebservice yrWebservice,
+            DbContextDataAnotationValidation dbContextDataAnotationValidation
+            )
         {
             _unitOfWork = unitOfWork;
             _geoNamesWebservice = geoNamesWebservice;
             _yrWebservice = yrWebservice;
+            _dbContextDataAnotationValidation = dbContextDataAnotationValidation;
         }
 
         public IEnumerable<Location> GetLocation(string search)
@@ -66,7 +74,10 @@ namespace Weather.Domain.Service
         {
             if (!location.Forecasts.Any() || (location.Timestamp - DateTime.Now).TotalHours <= 0)
             {
+
                 RefreshForecasts(location);
+
+                
 
                 location.Timestamp = DateTime.Now.AddHours(1);
                 _unitOfWork.LocationRepository.Update(location);
@@ -85,7 +96,6 @@ namespace Weather.Domain.Service
 
         public void RefreshForecasts(Location location)
         {
-
             foreach (var forecast in location.Forecasts.ToList())
             {
                 _unitOfWork.ForecastRepository.Remove(forecast.Id);
@@ -93,11 +103,18 @@ namespace Weather.Domain.Service
             }
             var forecasts = _yrWebservice.GetForecasts(location);
 
+            // Todo implement validation before insertion
+            //_dbContextDataAnotationValidation.TryValidate();
+
             foreach (var forecast in forecasts)
             {
                 _unitOfWork.ForecastRepository.Add(forecast);
-                
+              
             }           
         }
+        
+    
     }
+
+
 }

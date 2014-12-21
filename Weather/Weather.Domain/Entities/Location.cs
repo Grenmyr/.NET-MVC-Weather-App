@@ -7,7 +7,7 @@ namespace Weather.Domain.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Location
+    public partial class Location 
     {
         public Location(JToken location)
             : this()
@@ -19,6 +19,7 @@ namespace Weather.Domain.Entities
             Name = location.Value<string>("name");         
             Timestamp = DateTime.Now.AddHours(1);
         }
+        
     }
 
     [Table("appSchema.Location")]

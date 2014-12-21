@@ -9,18 +9,11 @@ namespace Weather.Domain.Entities
     using System.Xml.Linq;
 
 
-    public partial class Forecast
+    public partial class Forecast 
     {
-        private IEnumerable<Forecast> forecasts;
-        public IEnumerable<Forecast> Forecasts
-        {
-            get { return forecasts != null ? forecasts : null; }
-        }
 
-        public Forecast ()
-        {
-
-        }
+            //Tom
+      
     }
 
 
