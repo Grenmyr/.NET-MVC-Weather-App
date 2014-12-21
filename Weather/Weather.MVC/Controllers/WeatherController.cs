@@ -25,6 +25,9 @@ namespace Weather.MVC.Controllers
         // GET: Weather
         public ActionResult Index()
         {
+            var yr = new YrWebservice();
+            var dsa = yr.GetForecasts(new Location());
+
             return View("index");
         }
      
@@ -44,9 +47,23 @@ namespace Weather.MVC.Controllers
 
             //var search = new GeoNamesWebservice();
             //var list = search.FindLocation("Kalmar");
-            var locations = _service.getLocation(location.Name);
+            var locations = _service.GetLocation(location.Name);
 
             return View("Locations",locations);
+        }
+
+        public ActionResult Forecast(int id)
+        {
+           var location =  _service.GetLocationById(id);
+
+           if (location == null)
+            {
+                // exceptionstuff
+            }
+            
+            var forecast = _service.GetForecast(location);
+
+            return View("forecast");
         }
        
     }

@@ -5,6 +5,26 @@ namespace Weather.Domain.Entities
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Collections;
+    using System;
+    using System.Xml.Linq;
+
+
+    public partial class Forecast
+    {
+        public Forecast(string arg1, string arg2)
+            :this()
+        {
+
+        }
+
+        public Forecast ()
+        {
+            var test = Temperature;
+        }
+    }
+
+
 
     [Table("appSchema.Forecast")]
     public partial class Forecast

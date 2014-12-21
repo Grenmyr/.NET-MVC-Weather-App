@@ -16,18 +16,19 @@ namespace Weather.Domain.Service
         private YrWebservice _yrWebservice;
 
         public WeatherService()
-            : this(new UnitOfWork(), new GeoNamesWebservice())
+            : this(new UnitOfWork(), new GeoNamesWebservice(), new YrWebservice())
         {
 
         }
 
-        public WeatherService(IUnitOfWork unitOfWork, GeoNamesWebservice geoNamesWebservice)
+        public WeatherService(IUnitOfWork unitOfWork, GeoNamesWebservice geoNamesWebservice, YrWebservice yrWebservice)
         {
             _unitOfWork = unitOfWork;
             _geoNamesWebservice = geoNamesWebservice;
+            _yrWebservice = yrWebservice;
         }
 
-        public IEnumerable< Location> getLocation(string search)
+        public IEnumerable< Location> GetLocation(string search)
         {
             var locations = _unitOfWork.LocationRepository.Get(l => l.Name == search);
 
@@ -47,6 +48,43 @@ namespace Weather.Domain.Service
                 _unitOfWork.Save();
             }
             return relevantList;
+        }
+
+        public Location GetLocationById (int id)
+        {
+             var selectedLocation = _unitOfWork.LocationRepository.GetById(id);
+
+             return selectedLocation;
+        }
+
+        public IEnumerable<Forecast> GetForecast(Location location)
+        {
+            if (!location.Forecasts.Any() || (location.Timestamp - DateTime.Now).TotalHours <= 0) 
+            {
+                RefreshForecasts(location);                        
+            }
+            else
+            {
+                var forecast = location.Forecasts;  
+            }
+        
+            //var forecasts = _yrWebservice.GetForecast(id);
+            throw new NotImplementedException();
+        }
+
+        public void RefreshForecasts(Location location)
+        {
+
+            foreach (var forecast in location.Forecasts)
+            {
+                _unitOfWork.ForecastRepository.Remove(forecast.Id);
+            }
+
+             var test = _yrWebservice.GetForecasts(location);
+
+
+
+
         }
 
     }
