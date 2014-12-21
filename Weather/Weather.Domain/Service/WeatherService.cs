@@ -15,11 +15,16 @@ namespace Weather.Domain.Service
         private GeoNamesWebservice _geoNamesWebservice;
         private YrWebservice _yrWebservice;
 
+        
+
         public WeatherService()
             : this(new UnitOfWork(), new GeoNamesWebservice(), new YrWebservice())
         {
 
         }
+
+   
+      
 
         public WeatherService(IUnitOfWork unitOfWork, GeoNamesWebservice geoNamesWebservice, YrWebservice yrWebservice)
         {
@@ -30,7 +35,7 @@ namespace Weather.Domain.Service
 
         public IEnumerable<Location> GetLocation(string search)
         {
-            var locations = _unitOfWork.LocationRepository.Get(l => l.Name == search);
+            var locations = _unitOfWork.LocationRepository.Get(l => l.Name == search) as IEnumerable<Location>;
 
             //TODO IMPLEMENT TIMESTAMP
             if (locations.Any())
@@ -66,14 +71,16 @@ namespace Weather.Domain.Service
                 location.Timestamp = DateTime.Now.AddHours(1);
                 _unitOfWork.LocationRepository.Update(location);
                 _unitOfWork.Save();
+
+
+                return location.Forecasts;
             }
             else
             {
-                var forecast = location.Forecasts;
+         
+                return location.Forecasts;
             }
 
-            //var forecasts = _yrWebservice.GetForecast(id);
-            throw new NotImplementedException();
         }
 
         public void RefreshForecasts(Location location)

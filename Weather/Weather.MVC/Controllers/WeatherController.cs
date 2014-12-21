@@ -12,7 +12,9 @@ namespace Weather.MVC.Controllers
     public class WeatherController : Controller
     {
         private WeatherService _service;
-       
+        private IEnumerable<Location> locations;
+        private IEnumerable<Forecast> forecasts;
+
         public WeatherController()
             : this(new WeatherService())
         {
@@ -25,46 +27,57 @@ namespace Weather.MVC.Controllers
         // GET: Weather
         public ActionResult Index()
         {
-            //var yr = new YrWebservice();
-            //var dsa = yr.GetForecasts(new Location());
-
-            return View("index");
+            return View("Index");
         }
-     
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include="Name")]Location location)
+        public ActionResult Index([Bind(Include = "Name")]Location location)
         {
-            //var date = DateTime.Now.AddHours(1);
-            //var newdate = DateTime.Now;   
-            //var hours = (date - newdate).TotalHours;
-            //var location = new Location();
-            //location.Lat = "56";
-            //location.Lng = "16";
-
-            //var forecast = new YrWebservice();
-            //forecast.GetForecast(location);
-
-            //var search = new GeoNamesWebservice();
-            //var list = search.FindLocation("Kalmar");
-            var locations = _service.GetLocation(location.Name);
-
-            return View("Locations",locations);
-        }
-
-        public ActionResult Forecast(int id)
-        {
-           var location =  _service.GetLocationById(id);
-
-           if (location == null)
+            try
             {
-                // exceptionstuff
+                // TODO keep tryupdate or not use it?
+                TryUpdateModel(locations = _service.GetLocation(location.Name));
+                         
             }
-            
-            var forecast = _service.GetForecast(location);
-
-            return View("forecast");
+            catch (Exception ex)
+            {
+                // Bubble downish to fetch error and write it.
+                while (ex.InnerException != null)
+                {
+                    ex = ex.InnerException;
+                }
+                ModelState.AddModelError(String.Empty, ex.Message);
+            }
+            return View("Locations", locations);
         }
-       
+
+        // TODO bind ID? validation? Errorhandling?
+        public ActionResult Forecast(int id)
+        {           
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var location = _service.GetLocationById(id);
+
+                    if (location != null)
+                    {
+                        forecasts = _service.GetForecast(location);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Bubble downish to fetch error and write it.
+                while (ex.InnerException != null)
+                {
+                    ex = ex.InnerException;
+                }
+                ModelState.AddModelError(String.Empty, ex.Message);
+            }
+            return View("Forecasts",forecasts);
+        }
+
     }
 }

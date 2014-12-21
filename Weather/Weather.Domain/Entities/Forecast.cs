@@ -11,15 +11,15 @@ namespace Weather.Domain.Entities
 
     public partial class Forecast
     {
-        public Forecast(string arg1, string arg2)
-            :this()
+        private IEnumerable<Forecast> forecasts;
+        public IEnumerable<Forecast> Forecasts
         {
-
+            get { return forecasts != null ? forecasts : null; }
         }
 
         public Forecast ()
         {
-            var test = Temperature;
+
         }
     }
 
