@@ -30,11 +30,11 @@ namespace Weather.Domain.Webservices
             {
                 xmlResponse = XDocument.Load(content);
             }
+
+
             var alltimes = xmlResponse.Descendants("time");
-
-
-
             var currentWeather = alltimes.Take(2);
+
             var superlist = new List<Forecast>();
 
             superlist.Add(new Forecast()

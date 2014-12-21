@@ -62,6 +62,10 @@ namespace Weather.Domain.Service
             if (!location.Forecasts.Any() || (location.Timestamp - DateTime.Now).TotalHours <= 0)
             {
                 RefreshForecasts(location);
+
+                location.Timestamp = DateTime.Now.AddHours(1);
+                _unitOfWork.LocationRepository.Update(location);
+                _unitOfWork.Save();
             }
             else
             {
@@ -80,18 +84,13 @@ namespace Weather.Domain.Service
                 _unitOfWork.ForecastRepository.Remove(forecast.Id);
                 
             }
-            _unitOfWork.Save();
             var forecasts = _yrWebservice.GetForecasts(location);
 
             foreach (var forecast in forecasts)
             {
                 _unitOfWork.ForecastRepository.Add(forecast);
                 
-            }
-            _unitOfWork.Save();
-
-
+            }           
         }
-
     }
 }
