@@ -1,0 +1,36 @@
+﻿@model Weather.MVC.ViewModels.ForecastViewModel
+@{
+    ViewBag.Title = "Forecast";
+}
+
+<h2>Forecast</h2>
+
+
+
+@if (Model != null && Model.GotForecasts)
+{
+    var url = Model.IconUrl;
+    int count = 0;
+    <div id="tweets">
+        <h2>
+            Weather Forecast Now and for next 4 days from @Model.Location.Name
+        </h2>  
+        @foreach (var item in Model.Forecasts)
+        {              
+            var imageSrc = String.Format(url,item.SymbolId);
+            <div>
+                <h5>@Html.DisplayFor(i => Model.PresentDay)</h5>
+                <img src=@imageSrc height="50" width="50" />
+                <p> Temperature :@Html.DisplayFor(i => item.Temperature) Celsius. </p>
+                <p> NederBird : @Html.DisplayFor(i => item.NederBird) mm.</p>
+            
+
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>den var null</p>
+}
+

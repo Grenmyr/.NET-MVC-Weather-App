@@ -7,6 +7,7 @@ using Weather.Domain;
 using Weather.Domain.Entities;
 using Weather.Domain.Service;
 using Weather.Domain.Webservices;
+using Weather.MVC.ViewModels;
 namespace Weather.MVC.Controllers
 {
     public class WeatherController : Controller
@@ -14,6 +15,8 @@ namespace Weather.MVC.Controllers
         private WeatherService _service;
         private IEnumerable<Location> locations;
         private IEnumerable<Forecast> forecasts;
+
+        private ForecastViewModel forecastViewModel = new ForecastViewModel();
 
         public WeatherController()
             : this(new WeatherService())
@@ -59,11 +62,13 @@ namespace Weather.MVC.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var location = _service.GetLocationById(id);
+                    forecastViewModel.Location = _service.GetLocationById(id);
+                    //var location = _service.GetLocationById(id);
 
-                    if (location != null)
+                    if (forecastViewModel.Location != null)
                     {
-                        forecasts = _service.GetForecast(location);
+                        //forecasts = _service.GetForecast(location);
+                        forecastViewModel.Forecasts = _service.GetForecast(forecastViewModel.Location);
                     }
                 }
             }
@@ -76,8 +81,10 @@ namespace Weather.MVC.Controllers
                 }
                 ModelState.AddModelError(String.Empty, ex.Message);
             }
-            return View("Forecasts",forecasts);
+            return View(forecastViewModel);
         }
+
+
 
     }
 }

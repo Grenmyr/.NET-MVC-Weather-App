@@ -24,10 +24,7 @@ namespace Weather.Domain.Service
             : this(new UnitOfWork(), new GeoNamesWebservice(), new YrWebservice(), new DbContextDataAnotationValidation())
         {
 
-        }
-
-   
-      
+        }      
 
         public WeatherService(IUnitOfWork unitOfWork,
             GeoNamesWebservice geoNamesWebservice,
@@ -53,6 +50,7 @@ namespace Weather.Domain.Service
 
             locations = _geoNamesWebservice.FindLocation(search);
 
+            //TODO göteborg buggar
             var relevantList = locations.Select(l => l).Where(l => l.Name == search).ToList();
 
             foreach (var location in relevantList)
@@ -76,8 +74,6 @@ namespace Weather.Domain.Service
             {
 
                 RefreshForecasts(location);
-
-                
 
                 location.Timestamp = DateTime.Now.AddHours(1);
                 _unitOfWork.LocationRepository.Update(location);

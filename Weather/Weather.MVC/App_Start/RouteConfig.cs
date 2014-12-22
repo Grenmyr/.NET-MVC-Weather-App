@@ -16,7 +16,8 @@ namespace Weather.MVC
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Weather", action = "Index", id = UrlParameter.Optional }
+                //defaults: new { controller = "Weather", action = "Forecast", id = 7 }
+                 defaults: new { controller = "Weather", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

@@ -162,7 +162,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Weather\index.cshtml" />
     <Content Include="Views\Weather\Locations.cshtml" />
-    <Content Include="Views\Weather\Forecasts.cshtml" />
+    <Content Include="Views\Weather\Forecast.cshtml" />
+    <Content Include="Views\Weather\test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Weather.Domain\Weather.Domain.csproj">

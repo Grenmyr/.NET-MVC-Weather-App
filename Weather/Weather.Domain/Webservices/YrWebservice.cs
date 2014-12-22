@@ -41,7 +41,8 @@ namespace Weather.Domain.Webservices
             {
                 LocationId = location.Id,               
                 Temperature = currentWeather.Descendants("temperature").First().Attribute("value").Value,
-                SymbolId = int.Parse(currentWeather.Descendants("symbol").First().Attribute("number").Value)
+                SymbolId = int.Parse(currentWeather.Descendants("symbol").First().Attribute("number").Value),
+                NederBird = currentWeather.Descendants("precipitation").First().Attribute("value").Value
             });
 
             var symbolId = xmlResponse.Descendants("time").Skip(2).Where(d => d.Attribute("to").Value.Contains("12:00")
@@ -49,15 +50,22 @@ namespace Weather.Domain.Webservices
                                ).Select(n => n.Descendants("symbol").First().Attribute("number").Value)
                                .Take(4).ToArray();
 
+            var nederBird = xmlResponse.Descendants("time").Skip(2).Where(d => d.Attribute("to").Value.Contains("12:00")
+                             && d.Attribute("from").Value.Contains("06:00")
+                             ).Select(n => n.Descendants("precipitation").First().Attribute("value").Value)
+                             .Take(4).ToArray();
+
             var temperature = xmlResponse.Descendants("time").Skip(2).Where(d => d.Attribute("to").Value.Contains("12:00")
                                && d.Attribute("from").Value.Contains("12:00")
                                ).Select(n => n.Descendants("temperature").First().Attribute("value").Value)
                                .Take(4).ToArray();
 
+
             for (int i = 0; i < 4; i++)
             {
                 superlist.Add(new Forecast()
                 {
+                    NederBird = nederBird[i].ToString(),
                     LocationId = location.Id,
                     Temperature = temperature[i].ToString(),
                     SymbolId = int.Parse(symbolId[i])
