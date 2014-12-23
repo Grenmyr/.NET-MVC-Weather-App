@@ -1,25 +1,26 @@
-﻿@model Weather.Domain.Entities.Location
+﻿@model Weather.MVC.ViewModels.ForecastViewModel
 @{
 
     ViewBag.Title = "index";
 }
 
-<h2>index</h2>
-
+@Html.ValidationSummary(true)
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <div>
-        @Html.LabelFor(model => model.Name):
-    </div>
+    <div class="body-content form-group" >
 
-    <div>
-        @Html.EditorFor(model => model.Name)
-        @Html.ValidationMessageFor(model => model.Name)
+        @Html.LabelFor(model => model.Name, new { @class = "form-control" })
+        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control"  } })
+        @Html.ValidationMessageFor(model => model.Name, String.Empty, new { @class = "text-danger" })
+        <p>
+            <input type="submit" value="Välj Plats" />
+        </p>
     </div>
-
-    <p>
-        <input type="submit" value="Välj Plats" />
-    </p>
 }
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
 
+    
+}

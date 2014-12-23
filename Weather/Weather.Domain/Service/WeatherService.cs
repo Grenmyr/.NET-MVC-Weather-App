@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +41,7 @@ namespace Weather.Domain.Service
 
         public IEnumerable<Location> GetLocation(string search)
         {
+            search = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(search);
             var locations = _unitOfWork.LocationRepository.Get(l => l.Name == search) as IEnumerable<Location>;
 
             //TODO IMPLEMENT TIMESTAMP

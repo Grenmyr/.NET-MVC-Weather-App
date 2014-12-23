@@ -2,29 +2,23 @@
 @{
     ViewBag.Title = "Forecast";
 }
-
-<h2>Forecast</h2>
-
-
-
 @if (Model != null && Model.GotForecasts)
 {
     var url = Model.IconUrl;
+
     
-    <div id="tweets">
         <h2>
             Weather Forecast Now and for next 4 days from @Model.Location.Name
-        </h2>  
+        </h2>
+    <div class="row col">
         @foreach (var item in Model.Forecasts)
-        {              
-            var imageSrc = String.Format(url,item.SymbolId);
-            <div>
+        {
+            var imageSrc = String.Format(url, item.SymbolId);
+            <div class="col-md-4">
                 <h5>@Html.DisplayFor(i => Model.PresentDay)</h5>
                 <img src=@imageSrc height="50" width="50" />
                 <p> Temperature :@Html.DisplayFor(i => item.Temperature) Celsius. </p>
                 <p> NederBird : @Html.DisplayFor(i => item.NederBird) mm.</p>
-            
-
             </div>
         }
     </div>

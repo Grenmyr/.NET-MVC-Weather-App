@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -10,7 +12,7 @@ namespace Weather.MVC.ViewModels
     public class ForecastViewModel
     {
         private int count = 0;
-        private string _name { get; set; }
+
         public string IconUrl
         {
             get { return "http://api.yr.no/weatherapi/weathericon/1.1/?symbol={0};content_type=image/png"; }
@@ -24,12 +26,12 @@ namespace Weather.MVC.ViewModels
                 switch (Count)
                 {
                     case 1:
-                         
-                        return String.Format("Todays Weather based on most recent forecast from {0}:00.",DateTime.Now.Hour);
+
+                        return String.Format("Most recent forecast {0}:00 today.", DateTime.Now.Hour);
                     case 2:
                         return "Tomorrow 12:00";
                     case 3:
-                        return String.Format("{0} 12:00",DateTime.Today.AddDays(2).DayOfWeek.ToString());
+                        return String.Format("{0} 12:00", DateTime.Today.AddDays(2).DayOfWeek.ToString());
                     case 4:
                         return String.Format("{0} 12:00", DateTime.Today.AddDays(3).DayOfWeek.ToString());
                     case 5:
@@ -37,11 +39,11 @@ namespace Weather.MVC.ViewModels
                     default:
                         return String.Format("{0} 12:00", DateTime.Today.AddDays(5).DayOfWeek.ToString());
                 }
-            }  
-            
+            }
+
         }
 
-        public int Count 
+        public int Count
         {
             get { if (count >= 5) { count = 0; } count++; return count; }
         }
@@ -53,7 +55,7 @@ namespace Weather.MVC.ViewModels
         }
         public bool GotLocations
         {
-            get { return Locations != null &&  Locations.Any(); }
+            get { return Locations != null && Locations.Any(); }
         }
 
         public IEnumerable<Forecast> Forecasts
@@ -63,20 +65,13 @@ namespace Weather.MVC.ViewModels
         }
         public Location Location { get; set; }
 
-
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                // TODO fix emtry string search
-                var fixedCharacters = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
-                _name = fixedCharacters;
-            }
-        }
+        [DisplayName("City or village")]
+        [Required]
+        [StringLength(100)]
+        public string Name { get; set; }
 
         public IEnumerable<Location> Locations { get; set; }
 
-       
+
     }
 }

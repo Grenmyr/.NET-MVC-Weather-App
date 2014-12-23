@@ -21,8 +21,8 @@ namespace Weather.MVC.Controllers
             : this(new WeatherService())
         {
             // TODO : Validera Formulärdata. ("name")
-            // TODO : Validera data från Webservices innan de sätts i databas.
-            // TODO : Felhantering
+            // TODO: Validera data från Webservices innan de sätts i databas.
+            // TODO: Skapa _layoutvyer som kan delas mellan de olika sidorna.
         }
         public WeatherController(WeatherService weatherservice)
         {
@@ -40,9 +40,15 @@ namespace Weather.MVC.Controllers
         {
             try
             {
-                // TODO keep tryupdate or not use it?
-                TryUpdateModel(forecastViewModel.Locations = _service.GetLocation(forecastViewModel.Name));
-                         
+                if (ModelState.IsValid)
+                {
+                    // TODO keep tryupdate or not use it?
+                    TryUpdateModel(forecastViewModel.Locations = _service.GetLocation(forecastViewModel.Name));
+                }
+                else
+                {
+                    return View("index");
+                }
             }
             catch (Exception ex)
             {
@@ -52,6 +58,8 @@ namespace Weather.MVC.Controllers
                     ex = ex.InnerException;
                 }
                 ModelState.AddModelError(String.Empty, ex.Message);
+                // Ta bort sen när den inte behövs
+                return View("index");
             }
             return View("Locations", forecastViewModel);
         }
