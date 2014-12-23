@@ -10,7 +10,7 @@
 @if (Model != null && Model.GotForecasts)
 {
     var url = Model.IconUrl;
-    int count = 0;
+    
     <div id="tweets">
         <h2>
             Weather Forecast Now and for next 4 days from @Model.Location.Name
@@ -31,6 +31,6 @@
 }
 else
 {
-    <p>den var null</p>
+    <p>Oops unknown error, no forecasts was found.</p>
 }
 

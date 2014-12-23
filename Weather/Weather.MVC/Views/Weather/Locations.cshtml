@@ -5,37 +5,47 @@
 }
 
 <h2>Locations</h2>
-
-<table class="table">
-    <tr>
-        <th>
-            City
-        </th>
-        <th>
-            Region
-        </th>
-        <th>
-            Country
-        </th>
-
-    </tr>
-
-    @foreach (var item in Model.Locations)
-    {
+@if (Model != null && Model.GotLocations)
+{
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AdminName1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CountryName)
-            </td>
-            <td>
-                @Html.ActionLink("Show Weather", "Forecast", new { id = item.Id })
-            </td>
+            <th>
+                City
+            </th>
+            <th>
+                Region
+            </th>
+            <th>
+                Country
+            </th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model.Locations)
+    {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdminName1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CountryName)
+                </td>
+                <td>
+                    @Html.ActionLink("Show Weather", "Forecast", new { id = item.Id })
+                </td>
+            </tr>
+
+    }
+    </table>
+}
+else
+{
+    <h4>
+        you must have typed bad location, no locations was found.
+        @Html.ActionLink("Try again", "Index") 
+    </h4>
+
+}
+    

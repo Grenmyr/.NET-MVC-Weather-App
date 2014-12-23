@@ -51,6 +51,10 @@ namespace Weather.MVC.ViewModels
         {
             get { return Forecasts != null && Forecasts.Any(); }
         }
+        public bool GotLocations
+        {
+            get { return Locations != null &&  Locations.Any(); }
+        }
 
         public IEnumerable<Forecast> Forecasts
         {
@@ -65,6 +69,7 @@ namespace Weather.MVC.ViewModels
             get { return _name; }
             set
             {
+                // TODO fix emtry string search
                 var fixedCharacters = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
                 _name = fixedCharacters;
             }

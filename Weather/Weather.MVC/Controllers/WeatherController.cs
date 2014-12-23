@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Weather.Domain;
@@ -21,6 +22,7 @@ namespace Weather.MVC.Controllers
         {
             // TODO : Validera Formulärdata. ("name")
             // TODO : Validera data från Webservices innan de sätts i databas.
+            // TODO : Felhantering
         }
         public WeatherController(WeatherService weatherservice)
         {
@@ -68,6 +70,10 @@ namespace Weather.MVC.Controllers
                     {
                         //forecasts = _service.GetForecast(location);
                         forecastViewModel.Forecasts = _service.GetForecast(forecastViewModel.Location);
+                    }
+                    else
+                    {
+                        return new HttpNotFoundResult();
                     }
                 }
             }
