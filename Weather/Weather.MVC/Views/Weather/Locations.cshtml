@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Weather.Domain.Entities.Location>
+﻿@model Weather.MVC.ViewModels.ForecastViewModel
 
 @{
     ViewBag.Title = "Locations";
@@ -20,7 +20,7 @@
 
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Locations)
     {
         <tr>
             <td>

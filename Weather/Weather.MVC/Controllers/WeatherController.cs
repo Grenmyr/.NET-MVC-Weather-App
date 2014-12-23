@@ -13,15 +13,14 @@ namespace Weather.MVC.Controllers
     public class WeatherController : Controller
     {
         private WeatherService _service;
-        private IEnumerable<Location> locations;
-        private IEnumerable<Forecast> forecasts;
-
+    
         private ForecastViewModel forecastViewModel = new ForecastViewModel();
 
         public WeatherController()
             : this(new WeatherService())
         {
-
+            // TODO : Validera Formulärdata. ("name")
+            // TODO : Validera data från Webservices innan de sätts i databas.
         }
         public WeatherController(WeatherService weatherservice)
         {
@@ -35,12 +34,12 @@ namespace Weather.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "Name")]Location location)
+        public ActionResult Index([Bind(Include = "Name")]ForecastViewModel forecastViewModel)
         {
             try
             {
                 // TODO keep tryupdate or not use it?
-                TryUpdateModel(locations = _service.GetLocation(location.Name));
+                TryUpdateModel(forecastViewModel.Locations = _service.GetLocation(forecastViewModel.Name));
                          
             }
             catch (Exception ex)
@@ -52,7 +51,7 @@ namespace Weather.MVC.Controllers
                 }
                 ModelState.AddModelError(String.Empty, ex.Message);
             }
-            return View("Locations", locations);
+            return View("Locations", forecastViewModel);
         }
 
         // TODO bind ID? validation? Errorhandling?
