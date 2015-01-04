@@ -65,7 +65,7 @@ namespace Weather.MVC.ViewModels
         }
         public Location Location { get; set; }
 
-        [DisplayName("City or village")]
+        [DisplayName("Submit City or village and Search")]
         [Required]
         [StringLength(100)]
         public string Name { get; set; }

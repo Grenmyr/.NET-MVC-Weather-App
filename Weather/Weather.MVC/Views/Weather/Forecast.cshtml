@@ -14,8 +14,8 @@
         @foreach (var item in Model.Forecasts)
         {
             var imageSrc = String.Format(url, item.SymbolId);
-            <div class="col-md-4">
-                <h5>@Html.DisplayFor(i => Model.PresentDay)</h5>
+            <div class="col-md-4 table-bordered">
+                <h4>@Html.DisplayFor(i => Model.PresentDay)</h4>
                 <img src=@imageSrc height="50" width="50" />
                 <p> Temperature :@Html.DisplayFor(i => item.Temperature) Celsius. </p>
                 <p> NederBird : @Html.DisplayFor(i => item.NederBird) mm.</p>
