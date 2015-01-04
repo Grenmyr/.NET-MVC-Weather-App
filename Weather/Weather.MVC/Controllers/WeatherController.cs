@@ -21,7 +21,6 @@ namespace Weather.MVC.Controllers
             : this(new WeatherService())
         {
             // TODO: Validera data från Webservices innan de sätts i databas.
-            // TODO: Skapa _layoutvyer som kan delas mellan de olika sidorna.
         }
         public WeatherController(WeatherService weatherservice)
         {
