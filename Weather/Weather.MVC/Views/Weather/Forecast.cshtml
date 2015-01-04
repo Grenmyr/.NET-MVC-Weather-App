@@ -6,7 +6,6 @@
 {
     var url = Model.IconUrl;
 
-    
         <h2>
             Weather Forecast Now and for next 4 days from @Model.Location.Name
         </h2>
@@ -26,5 +25,6 @@
 else
 {
     <p>Oops unknown error, no forecasts was found.</p>
+    @Html.Partial("_Return")
 }
 
