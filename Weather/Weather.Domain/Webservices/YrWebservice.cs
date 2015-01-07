@@ -63,13 +63,14 @@ namespace Weather.Domain.Webservices
 
             for (int i = 0; i < 4; i++)
             {
-                superlist.Add(new Forecast()
-                {
-                    NederBird = nederBird[i].ToString(),
-                    LocationId = location.Id,
-                    Temperature = temperature[i].ToString(),
-                    SymbolId = int.Parse(symbolId[i])
-                });
+                    superlist.Add(new Forecast()
+                    {
+                        NederBird = nederBird[i].ToString(),
+                        LocationId = location.Id,
+                        Temperature = temperature[i].ToString(),
+                        SymbolId = int.Parse(symbolId[i])
+                    });
+               
             }
 
 

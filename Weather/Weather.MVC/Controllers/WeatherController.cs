@@ -21,6 +21,7 @@ namespace Weather.MVC.Controllers
             : this(new WeatherService())
         {
             // TODO: Validera data från Webservices innan de sätts i databas.
+            // om bara en träff visa forecast.
         }
         public WeatherController(WeatherService weatherservice)
         {
