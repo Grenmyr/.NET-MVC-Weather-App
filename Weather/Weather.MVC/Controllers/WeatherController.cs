@@ -19,8 +19,7 @@ namespace Weather.MVC.Controllers
 
         public WeatherController()
             : this(new WeatherService())
-        {
-            // TODO: Validera data från Webservices innan de sätts i databas.
+        {       
             // om bara en träff visa forecast.
         }
         public WeatherController(WeatherService weatherservice)
@@ -71,11 +70,9 @@ namespace Weather.MVC.Controllers
                 if (ModelState.IsValid)
                 {
                     forecastViewModel.Location = _service.GetLocationById(id);
-                    //var location = _service.GetLocationById(id);
-
+                    
                     if (forecastViewModel.Location != null)
                     {
-                        //forecasts = _service.GetForecast(location);
                         forecastViewModel.Forecasts = _service.GetForecast(forecastViewModel.Location);
                     }
                     else

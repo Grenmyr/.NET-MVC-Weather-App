@@ -11,9 +11,7 @@ namespace Weather.Domain.Entities
 
     public partial class Forecast 
     {
-
-            //Tom
-      
+            //Tom   
     }
 
 

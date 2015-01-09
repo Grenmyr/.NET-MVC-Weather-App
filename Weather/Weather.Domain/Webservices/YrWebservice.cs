@@ -16,12 +16,14 @@ namespace Weather.Domain.Webservices
 {
     public class YrWebservice
     {
+        
 
         public IEnumerable<Forecast> GetForecasts(Location location)
         {
+            const int FORECASTLENGTH = 4;
+
             XDocument xmlResponse;
             var urlString = String.Format("http://api.yr.no/weatherapi/locationforecast/1.9/?lat={0};lon={1}", location.Lat, location.Lng);
-            //var urlstring = "http://api.yr.no/weatherapi/locationforecast/1.9/?lat=56;lon=16";
             var webRequest = WebRequest.Create(urlString);
 
             using (var response = webRequest.GetResponse())
@@ -35,9 +37,9 @@ namespace Weather.Domain.Webservices
             var alltimes = xmlResponse.Descendants("time");
             var currentWeather = alltimes.Take(2);
 
-            var superlist = new List<Forecast>();
+            var forecastList = new List<Forecast>();
 
-            superlist.Add(new Forecast()
+            forecastList.Add(new Forecast()
             {
                 LocationId = location.Id,               
                 Temperature = currentWeather.Descendants("temperature").First().Attribute("value").Value,
@@ -48,22 +50,22 @@ namespace Weather.Domain.Webservices
             var symbolId = xmlResponse.Descendants("time").Skip(2).Where(d => d.Attribute("to").Value.Contains("12:00")
                                && d.Attribute("from").Value.Contains("06:00")
                                ).Select(n => n.Descendants("symbol").First().Attribute("number").Value)
-                               .Take(4).ToArray();
+                               .Take(FORECASTLENGTH).ToArray();
 
             var nederBird = xmlResponse.Descendants("time").Skip(2).Where(d => d.Attribute("to").Value.Contains("12:00")
                              && d.Attribute("from").Value.Contains("06:00")
                              ).Select(n => n.Descendants("precipitation").First().Attribute("value").Value)
-                             .Take(4).ToArray();
+                             .Take(FORECASTLENGTH).ToArray();
 
             var temperature = xmlResponse.Descendants("time").Skip(2).Where(d => d.Attribute("to").Value.Contains("12:00")
                                && d.Attribute("from").Value.Contains("12:00")
                                ).Select(n => n.Descendants("temperature").First().Attribute("value").Value)
-                               .Take(4).ToArray();
+                               .Take(FORECASTLENGTH).ToArray();
 
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < FORECASTLENGTH; i++)
             {
-                    superlist.Add(new Forecast()
+                    forecastList.Add(new Forecast()
                     {
                         NederBird = nederBird[i].ToString(),
                         LocationId = location.Id,
@@ -73,56 +75,7 @@ namespace Weather.Domain.Webservices
                
             }
 
-
-
-            //var list = (from weather in xmlResponse.Descendants("time").Skip(2).Where(d => d.Attribute("to").Value.Contains("12:00")
-            //                  && d.Attribute("from").Value.Contains("12:00")).Select(n => n.Descendants("temperature")).Take(4) 
-
-            //        select new Forecast
-            //        { 
-            //            Temperature = weather.First().Attribute("value").Value.ToString()
-            //        });
-
-
-            return superlist;
-
-            //foreach (var item in list)
-            //{
-            //    superlist.Add(new Forecast()
-            //    {
-            //        Temperature = item.FirstOrDefault().Attribute("value").Value.ToString()
-            //    });
-            //}
-
-            //var secondNode =  xmlResponse.Descendants("time").Skip(2+i).Where(d => d.Attribute("to").Value.Contains("12:00")
-            //                && d.Attribute("from").Value.Contains("12:00"))
-
-            //return superlist;
-
-
-
-
-            //var forecast3 = xmlResponse.Descendants("time").Skip(2).Where(d => d.Attribute("to").Value.Contains("12:00")
-            //                    && d.Attribute("from").Value.Contains("12:00"))
-            //          .SelectMany(n => new[] { 
-            //            n.Descendants("temperature").First().Attribute("value").Value, 
-            //            n.Descendants("cloudiness").First().Attribute("percent").Value,
-            //            }                        
-            //              ).Take(12);
-
-
-
-
-
-
-
-            //var forecast1 = xmlResponse.Descendants("time").Skip(2).Where(d => d.Attribute("to").Value.Contains("12:00")
-            //                       && d.Attribute("from").Value.Contains("12:00"))
-            //              .SelectMany(n => new[] { n, n.NextNode }).Take(8).ToList();
-
-
-
-            // return superlist;
+            return forecastList;
         }
     }
 }

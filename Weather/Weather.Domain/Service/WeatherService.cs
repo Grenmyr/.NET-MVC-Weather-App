@@ -19,8 +19,6 @@ namespace Weather.Domain.Service
         private YrWebservice _yrWebservice;
         private DbContextDataAnotationValidation _dbContextDataAnotationValidation;
 
-        
-
         public WeatherService()
             : this(new UnitOfWork(), new GeoNamesWebservice(), new YrWebservice(), new DbContextDataAnotationValidation())
         {
@@ -44,7 +42,6 @@ namespace Weather.Domain.Service
             search = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(search);
             var locations = _unitOfWork.LocationRepository.Get(l => l.Name == search) as IEnumerable<Location>;
 
-            //TODO IMPLEMENT TIMESTAMP
             if (locations.Any())
             {
                 return locations;
@@ -52,7 +49,6 @@ namespace Weather.Domain.Service
 
             locations = _geoNamesWebservice.FindLocation(search);
 
-            //TODO göteborg buggar
             var relevantList = locations.Select(l => l).Where(l => l.Name == search).ToList();
 
             foreach (var location in relevantList)
