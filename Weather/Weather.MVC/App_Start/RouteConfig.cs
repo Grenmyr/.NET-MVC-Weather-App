@@ -18,6 +18,11 @@ namespace Weather.MVC
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Weather", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+              name: "Forecast",
+              url: "{controller}/{action}/{id}",
+              defaults: new { controller = "Weather", action = "Forecast", id = UrlParameter.Optional }
+          );
         }
     }
 }

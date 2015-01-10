@@ -14,12 +14,12 @@ namespace Weather.MVC.Controllers
     public class WeatherController : Controller
     {
         private WeatherService _service;
-    
+
         private ForecastViewModel forecastViewModel = new ForecastViewModel();
 
         public WeatherController()
             : this(new WeatherService())
-        {       
+        {
             // om bara en träff visa forecast.
         }
         public WeatherController(WeatherService weatherservice)
@@ -56,21 +56,29 @@ namespace Weather.MVC.Controllers
                     ex = ex.InnerException;
                 }
                 ModelState.AddModelError(String.Empty, ex.Message);
-                // Ta bort sen när den inte behövs
+
                 return View("index");
             }
-            return View("Locations", forecastViewModel);
-        }
+            if (forecastViewModel.Locations.Count() == 1)
+            {
+                var id = forecastViewModel.Locations.Select(l => l.Id).First();
+                return RedirectToAction("Forecast", new { id });
 
-        // TODO bind ID? validation? Errorhandling?
+            }
+
+            return View("Locations", forecastViewModel);
+
+
+        }
+        //validation? 
         public ActionResult Forecast(int id)
-        {           
+        {
             try
             {
                 if (ModelState.IsValid)
                 {
                     forecastViewModel.Location = _service.GetLocationById(id);
-                    
+
                     if (forecastViewModel.Location != null)
                     {
                         forecastViewModel.Forecasts = _service.GetForecast(forecastViewModel.Location);
