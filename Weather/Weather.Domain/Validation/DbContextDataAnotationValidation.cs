@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 
 namespace Weather.Domain.Validation
 {
-    public class DbContextDataAnotationValidation : IDbContextDataAnotationValidation 
-    {
-        public bool TryValidate(object @object, out ICollection<ValidationResult> results)
-        {
-            var validationContext = new ValidationContext(@object);
-            results = new List<ValidationResult>();
-            return Validator.TryValidateObject(@object, validationContext, results, true);
-        }
-    }
+
+    // Not using this to check if valid data from webservices before saving it.
+
+    //public class DbContextDataAnotationValidation : IDbContextDataAnotationValidation 
+    //{
+    //    public bool TryValidate(object @object, out ICollection<ValidationResult> results)
+    //    {
+    //        var validationContext = new ValidationContext(@object);
+    //        results = new List<ValidationResult>();
+    //        return Validator.TryValidateObject(@object, validationContext, results, true);
+    //    }
+    //}
 }

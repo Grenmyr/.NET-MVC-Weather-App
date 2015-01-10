@@ -17,24 +17,24 @@ namespace Weather.Domain.Service
         private IUnitOfWork _unitOfWork;
         private GeoNamesWebservice _geoNamesWebservice;
         private YrWebservice _yrWebservice;
-        private DbContextDataAnotationValidation _dbContextDataAnotationValidation;
+        //private DbContextDataAnotationValidation _dbContextDataAnotationValidation;
 
         public WeatherService()
-            : this(new UnitOfWork(), new GeoNamesWebservice(), new YrWebservice(), new DbContextDataAnotationValidation())
+            : this(new UnitOfWork(), new GeoNamesWebservice(), new YrWebservice()/*, new DbContextDataAnotationValidation()*/)
         {
 
         }      
 
         public WeatherService(IUnitOfWork unitOfWork,
             GeoNamesWebservice geoNamesWebservice,
-            YrWebservice yrWebservice,
-            DbContextDataAnotationValidation dbContextDataAnotationValidation
+            YrWebservice yrWebservice
+            //, DbContextDataAnotationValidation dbContextDataAnotationValidation
             )
         {
             _unitOfWork = unitOfWork;
             _geoNamesWebservice = geoNamesWebservice;
             _yrWebservice = yrWebservice;
-            _dbContextDataAnotationValidation = dbContextDataAnotationValidation;
+            //_dbContextDataAnotationValidation = dbContextDataAnotationValidation;
         }
 
         public IEnumerable<Location> GetLocation(string search)
