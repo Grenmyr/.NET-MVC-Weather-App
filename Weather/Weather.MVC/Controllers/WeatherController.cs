@@ -13,7 +13,7 @@ namespace Weather.MVC.Controllers
 {
     public class WeatherController : Controller
     {
-        private WeatherService _service;
+        private IWeatherService _service;
 
         private ForecastViewModel forecastViewModel = new ForecastViewModel();
 
@@ -22,7 +22,7 @@ namespace Weather.MVC.Controllers
         {
             // om bara en träff visa forecast.
         }
-        public WeatherController(WeatherService weatherservice)
+        public WeatherController(IWeatherService weatherservice)
         {
             _service = weatherservice;
         }
@@ -59,6 +59,7 @@ namespace Weather.MVC.Controllers
 
                 return View("index");
             }
+
             if (forecastViewModel.Locations.Count() == 1)
             {
                 var id = forecastViewModel.Locations.Select(l => l.Id).First();

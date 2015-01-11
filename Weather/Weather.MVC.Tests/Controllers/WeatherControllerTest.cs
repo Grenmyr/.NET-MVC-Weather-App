@@ -6,17 +6,19 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Weather.MVC;
 using Weather.MVC.Controllers;
+using Weather.Domain.Entities;
+using Weather.Domain.Service;
 
 namespace Weather.MVC.Tests.Controllers
 {
     [TestClass]
-    public class HomeControllerTest
+    public class WeatherControllerTest
     {
         [TestMethod]
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            WeatherController controller = new WeatherController();
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -26,29 +28,19 @@ namespace Weather.MVC.Tests.Controllers
         }
 
         [TestMethod]
-        public void About()
+        public void Forecast()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            WeatherController controller = new WeatherController();
 
             // Act
-            ViewResult result = controller.About() as ViewResult;
+            var interger = 55;
+            ViewResult result = controller.Forecast(interger) as ViewResult;
 
-            // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
-        }
-
-        [TestMethod]
-        public void Contact()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Contact() as ViewResult;
-
-            // Assert
+            // Assert     
             Assert.IsNotNull(result);
         }
+
+        
     }
 }

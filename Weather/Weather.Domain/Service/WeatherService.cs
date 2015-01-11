@@ -12,7 +12,7 @@ using Weather.Domain.Webservices;
 
 namespace Weather.Domain.Service
 {
-    public class WeatherService 
+    public class WeatherService : IWeatherService 
     {
         private IUnitOfWork _unitOfWork;
         private GeoNamesWebservice _geoNamesWebservice;

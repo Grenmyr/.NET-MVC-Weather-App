@@ -83,8 +83,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\WeatherControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
@@ -93,11 +93,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Weather.Domain\Weather.Domain.csproj">
+      <Project>{b4628cd1-fbc9-4f40-be73-7d8d66aa4be2}</Project>
+      <Name>Weather.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Weather.MVC\Weather.MVC.csproj">
       <Project>{5DCA69AF-3A5B-44A6-8D87-4A2E260E1E97}</Project>
       <Name>Weather.MVC</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
